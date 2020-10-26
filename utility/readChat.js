@@ -1,13 +1,11 @@
 fs = require('fs');
-const config = require('./config.json')
+const config = require('../config.json')
 
 
 function readChat() {
-    fs.readFile(config.minecraft.logLocation, 'utf8', function (err,data) {
-    if (err) {
-        return console.log(err);
-    }
-    console.log(data);
+    fs.watchFile(config.minecraft.logLocation, (curr, prev) => {
+        console.log(`the current mtime is: ${curr.mtime}`);
+        console.log(`the previous mtime was: ${prev.mtime}`);
     });
 }
 
