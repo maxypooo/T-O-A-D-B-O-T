@@ -13,14 +13,13 @@ client
     .on('warn', console.warn)
     .on('debug', console.log)
     .on('ready', () => {
-        const chatChannelName = client.channels.cache.find(ch => ch.name === `${config.minecraft.chatChannelName}`);
-        const chatChannelsMap = client.channels.filter(c => c.name === `${config.minecraft.chatChannelName}`)
+        const chatChannelName = client.channels.cache.filter(ch => ch.name === `${config.minecraft.chatChannelName}`);
         console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
         client.user.setActivity(`[${config.prefix} help]`, {
             type: 'PLAYING'
         })
         .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
-        .then(rc.readChat(chatChannelName, chatChannelsMap))
+        .then(rc.readChat(chatChannelName))
         .catch(console.error);
     })
     .on('disconnect', () => {

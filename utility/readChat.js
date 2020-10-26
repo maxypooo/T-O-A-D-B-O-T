@@ -1,7 +1,7 @@
 fs = require('fs');
 const config = require('../config.json')
 
-function readChat(chatChannelName, chatChannelsMap) {
+function readChat(chatChannelName) {
     fs.watch(config.minecraft.logLocation, (curr, prev) => {
         fs.readFile(config.minecraft.logLocation, 'utf-8', async (err, data) => {
             if (!chatChannelName) return;
@@ -14,7 +14,7 @@ function readChat(chatChannelName, chatChannelsMap) {
 
             if (chatMsg != null) {
                 let messageContent = `${config.emojis.minecraft} ${chatMsg[0]}`;
-                await Promise.all(chatChannelsMap.map(c => c.send(messageContent)));
+                await Promise.all(chatChannelName.map(c => c.send(messageContent)));
                 console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
             }
         });
