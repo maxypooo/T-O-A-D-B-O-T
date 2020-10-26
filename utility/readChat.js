@@ -1,5 +1,6 @@
 fs = require('fs');
 const config = require('../config.json')
+const {CommandoClient} = require('discord.js-commando');
 const client = new CommandoClient({
     commandPrefix: config.prefix,
     owner: config.owner
