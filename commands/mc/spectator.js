@@ -34,7 +34,7 @@ module.exports = class SpectatorCommand extends Command {
     }
 
     async run(msg, args) {
-        exec("ls -la", (error, stdout, stderr) => {
+        exec(`screen -S minecraft -X stuff "say Gave spectator to ${args.mc_user} for 30 seconds.\n"`, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
