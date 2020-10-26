@@ -35,7 +35,7 @@ module.exports = class SpectatorCommand extends Command {
 
     async run(msg, args) {
         exec(`screen -S minecraft -X stuff "gamemode spectator ${args.mc_user}\n"`);
-        exec(`screen -S minecraft -X stuff 'title ${args.mc_user} title "Given Spectator for 30 seconds."\n'`);
+        exec(`screen -S minecraft -X stuff "title ${args.mc_user} title \"Given Spectator for 30 seconds.\"\n"`);
         setTimeout(function(){
             exec(`screen -S minecraft -X stuff "gamemode survival ${args.mc_user}\n"`);
         }, 30000);
