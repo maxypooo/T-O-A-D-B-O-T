@@ -8,8 +8,11 @@ function readChat(client) {
         fs.readFile(config.minecraft.logLocation, 'utf-8', (err, data) => {
             let lines = data.trim().split("\n");
             let lastLine = lines[lines.length - 1];
-            console.log(`Sent message "${lastline}" to channel ${config.minecraft.chat}.`)
-            client.channels.get(config.minecraft.chat).send(lastLine);
+            client.channels.fetch(config.minecraft.chat)
+            .then(channel => {
+                channel.send(lastLine);
+                console.log(`Sent message "${lastline}" to ${channel.toString()}.`)
+            })
         });
     });
 }
