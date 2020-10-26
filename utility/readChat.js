@@ -18,11 +18,8 @@ function readChat() {
 
             if (chatMsg != null) {
                 let messageContent = `${config.emojis.minecraft} ${chatMsg[0]}`;
-
-                let guildList = client.guilds.array();
-                console.log(guildList);
-
-
+                const chatChannelName = msg.client.channels.cache.filter(ch => ch.name === `${config.minecraft.chatChannelName}`);
+                await Promise.all(chatChannelName.map(c => c.send(messageContent)));
                 console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
             }
         });
