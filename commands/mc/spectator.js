@@ -34,10 +34,11 @@ module.exports = class SpectatorCommand extends Command {
     }
 
     async run(msg, args) {
-        msg.say(`Granting ${args.mc_user} specatator for 30 seconds.`);
+        msg.say(`Granted ${args.mc_user} Specatator Mode for 30 seconds.`);
         exec(`screen -S minecraft -X stuff "tellraw ${args.mc_user} {\"text\":\"You've been granted Spectator Mode for 30 seconds.\",\"italic\":true,\"color\":\"dark_green\"}\n"`);
         exec(`screen -S minecraft -X stuff "tellraw ${args.mc_user} {\"text\":\"[Click Here to return to Survival Mode early.]\",\"italic\":true,\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gamemode survival\"}}\n"`);
         exec(`screen -S minecraft -X stuff "gamemode spectator ${args.mc_user}\n"`);
+        
         setTimeout(function(){
             exec(`screen -S minecraft -X stuff "gamemode survival ${args.mc_user}\n"`);
         }, 30000);
