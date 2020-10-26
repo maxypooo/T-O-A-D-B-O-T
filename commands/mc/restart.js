@@ -29,7 +29,9 @@ module.exports = class RestartCommand extends Command {
     }
 
     async run(msg, args) {
-        msg.say(":toadright: Restarting the Minecraft Server, it should be up again in the next ~2 minutes. :toadleft:")
+        let toadright = '<:toadright:770118426806583296>';
+        let toadleft = '<:toadleft:770118421080965141>';
+        msg.say(`${toadright} Restarting the Minecraft Server, it should be up again in the next ~2 minutes. ${toadleft}`)
         exec(`screen -S minecraft -X stuff "say Server will restart in 1 minute.\n"`);
         setTimeout(function(){
             exec(`screen -S minecraft -X stuff "stop\n"`);
