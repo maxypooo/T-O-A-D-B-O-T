@@ -32,6 +32,9 @@ module.exports = class RestartCommand extends Command {
         msg.say(`${config.emojis.toadright} Minecraft Server restarting in 1 minute, restarting takes approx 2 minutes. ${config.emojis.toadleft}`)
         exec(`screen -S minecraft -X stuff "say Server restart initiated by ${msg.author.username}. Server will restart in 1 minute.\n"`);
         setTimeout(function(){
+            exec(`screen -S minecraft -X stuff "say Server will restart in 10 seconds.\n"`);
+        }, 50000);
+        setTimeout(function(){
             exec(`screen -S minecraft -X stuff "stop\n"`);
         }, 60000);
     }

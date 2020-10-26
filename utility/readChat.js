@@ -10,9 +10,11 @@ function readChat(chatChannelName) {
             let lines = data.trim().split("\n");
             let lastLine = lines[lines.length - 1];
             let chatMsg = lastLine.match(regex);
+        
 
             if (chatMsg != null) {
-                chatChannelName.send(`${config.emojis.minecraft} ${chatMsg[0]}`);
+                let messageContent = `${config.emojis.minecraft} ${chatMsg[0]}`;
+                await Promise.all(client.channels.filter(c => c.name === chatChannelName).map(c => c.send(messageContent)));
                 console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
             }
         });
