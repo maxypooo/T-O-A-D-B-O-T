@@ -18,9 +18,8 @@ function readChat(chatChannelName) {
 
             if (chatMsg != null) {
                 let messageContent = `${config.emojis.minecraft} ${chatMsg[0]}`;
-                console.log(chatChannelName);
                 chatChannelName.map(c => c.send(messageContent));
-                console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
+                console.log(`Sent message "${chatMsg[0]}" from Minecraft.`)
             }
         });
     });
