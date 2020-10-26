@@ -35,10 +35,8 @@ module.exports = class MCSayCommand extends Command {
     }
 
     async run(msg, args) {
-        let toadright = '<:toadright:770118404480696322>';
-        let toadleft = '<:toadleft:770118404857528360>';
         msg.delete();
-        msg.say(`${toadright} Sent ${msg.author.username}'s message: "${args.words}" to the Minecraft Server. ${toadleft}`);
-        exec(`screen -S minecraft -X stuff "say [Discord] ${msg.author.username}: ${args.words}\n"`);
+        msg.say(`${config.emojis.discord} [Discord] <${msg.author.username}> ${args.words}`);
+        exec(`screen -S minecraft -X stuff "say [Discord] <${msg.author.username}> ${args.words}\n"`);
     }
 };
