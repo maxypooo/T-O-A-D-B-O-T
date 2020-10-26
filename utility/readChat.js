@@ -3,8 +3,6 @@ const config = require('../config.json')
 
 function readChat(chatChannelName) {
     fs.watch(config.minecraft.logLocation, (curr, prev) => {
-        // console.log(`the current mtime is: ${curr.mtime}`);
-        // console.log(`the previous mtime was: ${prev.mtime}`);
         fs.readFile(config.minecraft.logLocation, 'utf-8', (err, data) => {
             if (!chatChannelName) return;
 
@@ -15,16 +13,8 @@ function readChat(chatChannelName) {
 
             if (chatMsg != null) {
                 chatChannelName.send(`${config.emojis.minecraft} [Minecraft] ${chatMsg}`);
-                console.log(`Sent message "${chatMsg}" to ${channel.toString()}.`)
+                console.log(`Sent message "${chatMsg}" to ${chatChannelName.toString()}.`)
             }
-
-
-
-            // client.channels.fetch(config.minecraft.chat)
-            // .then(channel => {
-            //     channel.send(lastLine);
-            //     console.log(`Sent message "${lastline}" to ${channel.toString()}.`)
-            // })
         });
     });
 }
