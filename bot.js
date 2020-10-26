@@ -13,7 +13,7 @@ client
     .on('warn', console.warn)
     .on('debug', console.log)
     .on('ready', () => {
-        const chatChannelName = member.guild.channels.cache.find(ch => ch.name === 'minecraft-chat');
+        const chatChannelName = client.channels.cache.find(ch => ch.name === 'minecraft-chat');
         console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
         client.user.setActivity(`[${config.prefix} help]`, {
             type: 'PLAYING'
