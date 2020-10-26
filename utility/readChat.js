@@ -9,11 +9,11 @@ function readChat(chatChannelName) {
             let regex = /<\w{3,16}> [\w\S ]*$/;
             let lines = data.trim().split("\n");
             let lastLine = lines[lines.length - 1];
-            let chatMsg = lastLine.match(regex)[0];
+            let chatMsg = lastLine.match(regex);
 
             if (chatMsg != null) {
-                chatChannelName.send(`${config.emojis.minecraft} [Minecraft] ${chatMsg}`);
-                console.log(`Sent message "${chatMsg}" to ${chatChannelName.toString()}.`)
+                chatChannelName.send(`${config.emojis.minecraft} [Minecraft] ${chatMsg[0]}`);
+                console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
             }
         });
     });
