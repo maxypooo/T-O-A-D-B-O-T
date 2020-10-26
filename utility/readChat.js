@@ -1,7 +1,9 @@
 fs = require('fs');
 const config = require('../config.json')
+const Discord = require('discord.js');
+const client = new Discord.Client();
 
-function readChat(client) {
+function readChat() {
     fs.watch(config.minecraft.logLocation, (curr, prev) => {
         // console.log(`the current mtime is: ${curr.mtime}`);
         // console.log(`the previous mtime was: ${prev.mtime}`);
