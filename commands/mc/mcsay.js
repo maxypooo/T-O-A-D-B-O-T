@@ -39,12 +39,9 @@ module.exports = class MCSayCommand extends Command {
 
         const chatChannelName = msg.client.channels.cache.find(ch => ch.name === `${config.minecraft.chatChannelName}`);
         let messageContent = `${config.emojis.discord} [${msg.author.username}] ${args.words}`;
-        this.sendToAllChannels(chatChannelName, messageContent);
+                await Promise.all(client.channels.filter(c => c.name === chatChannelName).map(c => c.send(messageContent)));
+
         exec(`screen -S minecraft -X stuff "say [Discord] [${msg.author.username}] ${args.words}\n"`);
-
     }
 
-    async sendToAllChannels(chatChannelName, messageContent) {
-        return await Promise.all(client.channels.filter(c => c.name === chatChannelName).map(c => c.send(messageContent)));
-    }
 };

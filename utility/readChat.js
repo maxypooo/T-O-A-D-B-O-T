@@ -1,7 +1,7 @@
 fs = require('fs');
 const config = require('../config.json')
 
-function readChat(chatChannelName) {
+async function readChat(chatChannelName) {
     fs.watch(config.minecraft.logLocation, (curr, prev) => {
         fs.readFile(config.minecraft.logLocation, 'utf-8', (err, data) => {
             if (!chatChannelName) return;
