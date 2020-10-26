@@ -33,7 +33,7 @@ module.exports = class MCSayCommand extends Command {
                     if (words.length > 50) return true;
                     return 'Message must be less than 50 characters in length.';
                 }
-            },
+            }],
         });
     }
 
