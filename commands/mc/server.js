@@ -21,15 +21,15 @@ module.exports = class ServerCommand extends Command {
         let description = "";
         let toadright = '<:toadright:770118404480696322>';
         let toadleft = '<:toadleft:770118404857528360>';
-        axios.get('https://api.mcsrvstat.us/2/' + config.serverIP).then(async res => {
+        axios.get('https://api.mcsrvstat.us/2/' + config.minecraft.serverIP).then(async res => {
             // handle success
             if (res.data.online) {
-                description = `IP: ${config.serverIP}\n` + 'Server Status: Online' + '\n' + 'Player: ' + 
+                description = `IP: ${config.minecraft.serverIP}\n` + 'Server Status: Online' + '\n' + 'Player: ' + 
                  res.data.players.online + ' / ' + res.data.players.max + '\n' + 'Last Updated: ' + 
                  await formatTime(res.data.debug.cachetime * 1000) + '\n'
             }
             else {
-                description = `IP: ${config.serverIP}\n` + 'Server Status: Offline' + '\n' + 'Last Updated: ' + 
+                description = `IP: ${config.minecraft.serverIP}\n` + 'Server Status: Offline' + '\n' + 'Last Updated: ' + 
                  await formatTime(res.data.debug.cachetime * 1000) + '\n'
             }
 
@@ -38,7 +38,7 @@ module.exports = class ServerCommand extends Command {
                 .setColor('#F56600')
                 .setTitle(`${toadright} T O A D S T A C K E R S Minecraft Server ${toadleft}`)
                 .setDescription(description)
-                .setThumbnail('https://api.mcsrvstat.us/icon/' + config.serverIP)
+                .setThumbnail('https://api.mcsrvstat.us/icon/' + config.minecraft.serverIP)
                 .setTimestamp();
 
             msg.say(embed)
