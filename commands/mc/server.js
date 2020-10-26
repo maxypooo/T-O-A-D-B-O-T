@@ -19,8 +19,8 @@ module.exports = class ServerCommand extends Command {
 
     async run(msg, args) {
         let description = "";
-        let toadright = '<:toadright:770118426806583296>';
-        let toadleft = '<:toadleft:770118421080965141>';
+        let toadright = '<:toadright:770118404480696322>';
+        let toadleft = '<:toadleft:770118404857528360>';
         axios.get('https://api.mcsrvstat.us/2/' + config.serverIP).then(async res => {
             // handle success
             if (res.data.online) {
