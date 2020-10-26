@@ -30,7 +30,7 @@ module.exports = class MCSayCommand extends Command {
                 prompt: 'What do you want to say?',
                 type: 'string',
                 validate: words => {
-                    if (words.length > 50) return true;
+                    if (words.length < 50) return true;
                     return 'Message must be less than 50 characters in length.';
                 }
             }],
