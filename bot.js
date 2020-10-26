@@ -1,7 +1,7 @@
 const config = require('./config.json')
 const path = require('path');
 const {CommandoClient} = require('discord.js-commando');
-const rc = require('utility/readChat.js')
+const rc = require('./utility/readChat.js')
 const client = new CommandoClient({
     commandPrefix: config.prefix,
     owner: config.owner
@@ -18,7 +18,7 @@ client
             type: 'PLAYING'
         })
         .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
-        .then()
+        .then(rc.readChat())
         .catch(console.error);
     })
     .on('disconnect', () => {
