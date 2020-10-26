@@ -6,7 +6,7 @@ const client = new CommandoClient({
     owner: config.owner
 });
 
-function readChat() {
+function readChat(chatChannelName) {
     fs.watch(config.minecraft.logLocation, (curr, prev) => {
         fs.readFile(config.minecraft.logLocation, 'utf-8', async (err, data) => {
 
@@ -18,8 +18,8 @@ function readChat() {
 
             if (chatMsg != null) {
                 let messageContent = `${config.emojis.minecraft} ${chatMsg[0]}`;
-                const chatChannelName = msg.client.channels.cache.filter(ch => ch.name === `${config.minecraft.chatChannelName}`);
-                await Promise.all(chatChannelName.map(c => c.send(messageContent)));
+                console.log(chatChannelName);
+                chatChannelName.map(c => c.send(messageContent));
                 console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
             }
         });
