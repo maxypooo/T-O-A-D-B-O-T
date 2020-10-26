@@ -13,16 +13,14 @@ module.exports = class ServerCommand extends Command {
             aliases: ['mcserver', 'server'],
             group: 'mc',
             memberName: 'server',
-            description: 'Clemson Esorts Minecraft Server Status',
-            throttling: {
-                usages: 1,
-                duration: 60
-            }
+            description: 'Minecraft Server Status',
         });
     }
 
     async run(msg, args) {
         let description = "";
+        let toadright = '<:toadright:770118426806583296>';
+        let toadleft = '<:toadleft:770118421080965141>';
         axios.get('https://api.mcsrvstat.us/2/' + config.serverIP).then(async res => {
             // handle success
             if (res.data.online) {
@@ -38,7 +36,7 @@ module.exports = class ServerCommand extends Command {
             /* Embed message */
             const embed = new Discord.MessageEmbed()
                 .setColor('#F56600')
-                .setTitle(`🐯 Clemson Esports MC Server 🐯`)
+                .setTitle(`${toadright} T O A D S T A C K E R S Minecraft Server ${toadleft}`)
                 .setDescription(description)
                 .setThumbnail('https://api.mcsrvstat.us/icon/' + config.serverIP)
                 .setTimestamp();
