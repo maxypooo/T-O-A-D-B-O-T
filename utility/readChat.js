@@ -1,9 +1,9 @@
 fs = require('fs');
 const config = require('../config.json')
 
-async function readChat(chatChannelName) {
+function readChat(chatChannelName) {
     fs.watch(config.minecraft.logLocation, (curr, prev) => {
-        fs.readFile(config.minecraft.logLocation, 'utf-8', (err, data) => {
+        fs.readFile(config.minecraft.logLocation, 'utf-8', async (err, data) => {
             if (!chatChannelName) return;
 
             let regex = /<\w{3,16}> [\w\S ]*$/;
