@@ -20,11 +20,7 @@ module.exports = class MCSayCommand extends Command {
             group: 'mc',
             memberName: 'mcsay',
             description: 'Write say something to the Minecraft Server.',
-            throttling: { //Throttles the command so you can only use it 1 time every 30 seconds.
-                usages: 2,
-                duration: 600
-            },
-            examples: [`${config.prefix} spectate Zerukai`],
+            examples: [`${config.prefix} say Your message here`],
             args: [{
                 key: 'words',
                 prompt: 'What do you want to say?',
