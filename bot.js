@@ -17,8 +17,9 @@ client
         client.user.setActivity(`[${config.prefix} help]`, {
             type: 'PLAYING'
         })
+        const chatChannelName = member.guild.channels.cache.find(ch => ch.name === 'minecraft-chat');
         .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
-        .then(rc.readChat())
+        .then(rc.readChat(chatChannelName))
         .catch(console.error);
     })
     .on('disconnect', () => {
