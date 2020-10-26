@@ -16,7 +16,7 @@ module.exports = class MCSayCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'mcsay',
-            aliases: ['say', 'mcs'],
+            aliases: ['say', 'mcs', "saymc", "mcchat"],
             group: 'mc',
             memberName: 'mcsay',
             description: 'Write say something to the Minecraft Server.',
