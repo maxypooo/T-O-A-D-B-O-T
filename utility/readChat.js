@@ -6,7 +6,7 @@ const client = new CommandoClient({
 });
 
 function readChat() {
-    fs.watchFile(config.minecraft.logLocation, (curr, prev) => {
+    fs.watch(config.minecraft.logLocation, (curr, prev) => {
         // console.log(`the current mtime is: ${curr.mtime}`);
         // console.log(`the previous mtime was: ${prev.mtime}`);
         fs.readFile(config.minecraft.logLocation, 'utf-8', (err, data) => {
