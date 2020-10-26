@@ -12,7 +12,7 @@ function readChat(chatChannelName) {
             let chatMsg = lastLine.match(regex);
 
             if (chatMsg != null) {
-                chatChannelName.send(`${config.emojis.minecraft} [Minecraft] ${chatMsg[0]}`);
+                chatChannelName.send(`${config.emojis.minecraft} ${chatMsg[0]}`);
                 console.log(`Sent message "${chatMsg[0]}" to ${chatChannelName.toString()}.`)
             }
         });

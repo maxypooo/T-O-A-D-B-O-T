@@ -36,7 +36,7 @@ module.exports = class MCSayCommand extends Command {
 
     async run(msg, args) {
         msg.delete();
-        msg.say(`${config.emojis.discord} [Discord] <${msg.author.username}> ${args.words}`);
-        exec(`screen -S minecraft -X stuff "say [Discord] <${msg.author.username}> ${args.words}\n"`);
+        msg.say(`${config.emojis.discord} [${msg.author.username}] ${args.words}`);
+        exec(`screen -S minecraft -X stuff "say [Discord] [${msg.author.username}] ${args.words}\n"`);
     }
 };
