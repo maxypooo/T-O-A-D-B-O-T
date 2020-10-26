@@ -17,7 +17,7 @@ module.exports = class PoofCommand extends Command {
         super(client, {
             name: 'poof',
             group: 'mc',
-            memberName: 'spectate',
+            memberName: 'poof',
             description: 'Plays some distracting particle effects at the target user.',
             throttling: { //Throttles the command so you can only use it 1 time every 30 seconds.
                 usages: 1,
