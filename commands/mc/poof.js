@@ -36,6 +36,5 @@ module.exports = class PoofCommand extends Command {
         msg.say(`Poofed ${args.mc_user}!`);
         exec(`screen -S minecraft -X stuff \"tellraw ${args.mc_user}"You were poofed by ${msg.author.username}!"\n\"`);
         exec(`screen -S minecraft -X stuff "execute at ${args.mc_user} run particle minecraft:totem_of_undying ~ ~ ~ 0 0 0 1 1500\n"`);
-
     }
 };
