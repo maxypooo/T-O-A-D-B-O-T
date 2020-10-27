@@ -26,7 +26,7 @@ function readChat(chatChannelName) {
     });
 }
 
-function verifyCode(code) {
+function verifyCode(code, msg) {
     let watcher = fs.watch(config.minecraft.logLocation, (curr, prev) => {
         fs.readFile(config.minecraft.logLocation, 'utf-8', async (err, data) => {
 
