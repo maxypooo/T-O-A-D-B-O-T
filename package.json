@@ -1,7 +1,7 @@
 {
-  "name": "clemson-bot",
-  "version": "0.0.1",
-  "description": "Discord bot for the Clemson Esports Discord at https://discord.com/invite/clemson",
+  "name": "toadbot",
+  "version": "1.0.0",
+  "description": "Discord bot for the T O A D S",
   "main": "bot.js",
   "dependencies": {
     "axios": "^0.20.0",

@@ -2,6 +2,7 @@ const config = require('./config.json')
 const path = require('path');
 const {CommandoClient} = require('discord.js-commando');
 const rc = require('./utility/readChat.js')
+const dbCreds = require('./utility/dbSetup.js') // should run on its own
 const client = new CommandoClient({
     commandPrefix: config.prefix,
     owner: config.owner
@@ -21,6 +22,8 @@ client
         .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
         .then(rc.readChat(chatChannelName))
         .catch(console.error);
+
+        
     })
     .on('disconnect', () => {
         console.warn('Disconnected!');

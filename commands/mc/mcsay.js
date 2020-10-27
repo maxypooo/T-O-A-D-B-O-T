@@ -38,8 +38,8 @@ module.exports = class MCSayCommand extends Command {
         msg.delete();
 
         const chatChannelName = msg.client.channels.cache.filter(ch => ch.name === `${config.minecraft.chatChannelName}`);
-        let messageContent = `${config.emojis.discord} [${msg.author.username}] ${args.words}`;
-        exec(`screen -S minecraft -X stuff "say [Discord] [${msg.author.username}] ${args.words}\n"`);
+        let messageContent = `${config.emojis.discord} <${msg.author.username}> ${args.words}`;
+        exec(`screen -S minecraft -X stuff "say [Discord - ${msg.author.username}] ${args.words}\n"`);
         await Promise.all(chatChannelName.map(c => c.send(messageContent)));
     }
 
