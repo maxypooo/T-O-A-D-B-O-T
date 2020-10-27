@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const config = require('../../config.json')
 const { exec } = require("child_process");
-const verificationHandler = require("../../utility/readChat.js")
+const verificationHandler = require("../../utility/readChat")
 
 module.exports = class VerifyCommand extends Command {
     constructor(client) {

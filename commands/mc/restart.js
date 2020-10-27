@@ -1,6 +1,8 @@
 const { Command } = require('discord.js-commando');
 const config = require('../../config.json')
 const { exec } = require("child_process");
+const dbUtils = require('../../utility/dbUtils')
+const modelDiscordMinecraft = require("../../utility/models/modelDiscordMinecraft")
 
 module.exports = class RestartCommand extends Command {
     constructor(client) {
@@ -20,13 +22,18 @@ module.exports = class RestartCommand extends Command {
 
     //TODO: VERIFICATION
     async run(msg, args) {
-        msg.say(`${config.emojis.toadright} Minecraft Server will restart in 1 minute, check back soon. ${config.emojis.toadleft}`)
-        exec(`screen -S minecraft -X stuff "say Server restart initiated by ${msg.author.username}. Server will restart in 1 minute.\n"`);
-        setTimeout(function(){
-            exec(`screen -S minecraft -X stuff "say Server will restart in 10 seconds.\n"`);
-        }, 50000);
-        setTimeout(function(){
-            exec(`screen -S minecraft -X stuff "stop\n"`);
-        }, 60000);
+        let model = new modelDiscordMinecraft();
+        if (dbUtils.isInDB(model, "discordID", msg.author.id)) {
+            msg.say(`${config.emojis.toadright} Minecraft Server will restart in 1 minute, check back soon. ${config.emojis.toadleft}`)
+            exec(`screen -S minecraft -X stuff "say Server restart initiated by ${msg.author.username}. Server will restart in 1 minute.\n"`);
+            setTimeout(function(){
+                exec(`screen -S minecraft -X stuff "say Server will restart in 10 seconds.\n"`);
+            }, 50000);
+            setTimeout(function(){
+                exec(`screen -S minecraft -X stuff "stop\n"`);
+            }, 60000);
+        } else {
+            msg.reply("You must first verify yourself using `toad verify` before you can use this command.")
+        }
     }
 };

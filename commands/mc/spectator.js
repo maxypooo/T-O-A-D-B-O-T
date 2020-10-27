@@ -1,6 +1,8 @@
 const { Command } = require('discord.js-commando');
 const config = require('../../config.json')
 const { exec } = require("child_process");
+const dbUtils = require('../../utility/dbUtils')
+const modelDiscordMinecraft = require("../../utility/models/modelDiscordMinecraft")
 
 module.exports = class SpectatorCommand extends Command {
     constructor(client) {
@@ -24,14 +26,20 @@ module.exports = class SpectatorCommand extends Command {
     }
 
     async run(msg, args) {
-        //TODO: VERIFICATION
-        msg.say(`${config.emojis.toadright} Granted ${args.mc_user} Specatator Mode for 30 seconds. ${config.emojis.toadleft}`);
-        exec(`screen -S minecraft -X stuff "tellraw ${args.mc_user} {\"text\":\"You've been granted Spectator Mode for 30 seconds.\",\"italic\":true,\"color\":\"dark_green\"}\n"`);
-        exec(`screen -S minecraft -X stuff "tellraw ${args.mc_user} {\"text\":\"[Click Here to return to Survival Mode early.]\",\"italic\":true,\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gamemode survival\"}}\n"`);
-        exec(`screen -S minecraft -X stuff "gamemode spectator ${args.mc_user}\n"`);
-        
-        setTimeout(function(){
-            exec(`screen -S minecraft -X stuff "gamemode survival ${args.mc_user}\n"`);
-        }, 30000);
+        let model = new modelDiscordMinecraft();
+        if (dbUtils.isInDB(model, "discordID", msg.author.id)) {
+            let mcUser = dbUtils.getMinecraftUser(model, "discordID", msg.author.id);
+
+            msg.say(`${config.emojis.toadright} Granted ${mcUser} Specatator Mode for 30 seconds. ${config.emojis.toadleft}`);
+            exec(`screen -S minecraft -X stuff "tellraw ${mcUser} {\"text\":\"You've been granted Spectator Mode for 30 seconds.\",\"italic\":true,\"color\":\"dark_green\"}\n"`);
+            exec(`screen -S minecraft -X stuff "tellraw ${mcUser} {\"text\":\"[Click Here to return to Survival Mode early.]\",\"italic\":true,\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gamemode survival\"}}\n"`);
+            exec(`screen -S minecraft -X stuff "gamemode spectator ${mcUser}\n"`);
+
+            setTimeout(function(){
+                exec(`screen -S minecraft -X stuff "gamemode survival ${mcUser}\n"`);
+            }, 30000);
+        } else {
+            msg.reply("You must first verify yourself using `toad verify` before you can use this command.")
+        }
     }
 };
