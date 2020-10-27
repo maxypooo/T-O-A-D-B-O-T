@@ -17,6 +17,7 @@ function isInDB(Model, hashkey, q) {
             }
         }
     });
+    console.log("done here")
 }
 
 function getDiscordUser(Model, hashkey, discordID) {
