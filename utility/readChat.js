@@ -35,25 +35,27 @@ function verifyCode(code) {
             let lastLine = lines[lines.length - 1];
             let chatMsg = lastLine.match(regex); //need to return this to Verify()git 
             
-            if (chatMsg[0].includes(code)) {
-                let mcUsername = chatMsg[0].substring(chatMsg[0].lastIndexOf("<") + 1, chatMsg[0].lastIndexOf(">"));
-                let u = new Entry();
-                u.discordID = msg.author.id;
-                u.discordUser = msg.author.username;
-                u.minecraftUser = mcUsername;
-                u.save({overwrite: false}, 
-                    function(err){
-                    if(err) {
-                        if (err.code === 'ConditionalCheckFailedException' && err.statusCode === 400) {
-                            console.log('discord id already exists.');
+            if (chatMsg != null) { 
+                if (chatMsg[0].includes(code)) {
+                    let mcUsername = chatMsg[0].substring(chatMsg[0].lastIndexOf("<") + 1, chatMsg[0].lastIndexOf(">"));
+                    let u = new Entry();
+                    u.discordID = msg.author.id;
+                    u.discordUser = msg.author.username;
+                    u.minecraftUser = mcUsername;
+                    u.save({overwrite: false}, 
+                        function(err){
+                        if(err) {
+                            if (err.code === 'ConditionalCheckFailedException' && err.statusCode === 400) {
+                                console.log('discord id already exists.');
+                            }
+                            else {
+                                console.log(err);
+                            }
                         }
-                        else {
-                            console.log(err);
-                        }
-                    }
-                });
-                watcher.close();
-            }
+                    });
+                    watcher.close();
+                }
+            } 
         });
     });
 }
