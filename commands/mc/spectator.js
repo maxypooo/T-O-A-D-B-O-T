@@ -22,7 +22,7 @@ module.exports = class SpectatorCommand extends Command {
 
     async run(msg, args) {
         if (dbUtils.isInDB(modelDiscordMinecraft, "discordID", msg.author.id)) {
-            let mcUser = dbUtils.getMinecraftUser(model, "discordID", msg.author.id);
+            let mcUser = dbUtils.getMinecraftUser(modelDiscordMinecraft, "discordID", msg.author.id);
 
             msg.say(`${config.emojis.toadright} Granted ${mcUser} Specatator Mode for 30 seconds. ${config.emojis.toadleft}`);
             exec(`screen -S minecraft -X stuff "tellraw ${mcUser} {\"text\":\"You've been granted Spectator Mode for 30 seconds.\",\"italic\":true,\"color\":\"dark_green\"}\n"`);
