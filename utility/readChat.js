@@ -54,6 +54,7 @@ function verifyCode(code, msg) {
                                 console.log(err);
                             }
                         }
+                        msg.say("Verification Successful! You can now use commands which require verification.");
                     });
                 }
             } 
