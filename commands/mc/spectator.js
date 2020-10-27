@@ -17,17 +17,11 @@ module.exports = class SpectatorCommand extends Command {
                 duration: 3600
             },
             examples: [`${config.prefix} spectate Zerukai`],
-            args: [{
-                key: 'mc_user',
-                prompt: 'Type your Minecraft Username.',
-                type: 'string',
-            }]
         });
     }
 
     async run(msg, args) {
-        let model = new modelDiscordMinecraft();
-        if (dbUtils.isInDB(model, "discordID", msg.author.id)) {
+        if (dbUtils.isInDB(modelDiscordMinecraft, "discordID", msg.author.id)) {
             let mcUser = dbUtils.getMinecraftUser(model, "discordID", msg.author.id);
 
             msg.say(`${config.emojis.toadright} Granted ${mcUser} Specatator Mode for 30 seconds. ${config.emojis.toadleft}`);

@@ -22,8 +22,7 @@ module.exports = class RestartCommand extends Command {
 
     //TODO: VERIFICATION
     async run(msg, args) {
-        let model = new modelDiscordMinecraft();
-        if (dbUtils.isInDB(model, "discordID", msg.author.id)) {
+        if (dbUtils.isInDB(modelDiscordMinecraft, "discordID", msg.author.id)) {
             msg.say(`${config.emojis.toadright} Minecraft Server will restart in 1 minute, check back soon. ${config.emojis.toadleft}`)
             exec(`screen -S minecraft -X stuff "say Server restart initiated by ${msg.author.username}. Server will restart in 1 minute.\n"`);
             setTimeout(function(){
