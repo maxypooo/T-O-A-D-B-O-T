@@ -14,13 +14,12 @@ async function isInDB(Model, hashkey, q) {
 }
 
 async function getDiscordUser(Model, hashkey, discordID) {
-    await Model.query(hashkey).eq(discordID).exec()
-    .then(results => {console.log(results[0].discordUser);});
+    return (await Model.query(hashkey).eq(discordID).exec())[0].discordUser;
+    
 }
 
 async function getMinecraftUser(Model, hashkey, discordID) {
-    await Model.query(hashkey).eq(discordID).exec()
-    .then(results => {console.log(results[0].minecraftUser);});
+    return (await Model.query(hashkey).eq(discordID).exec())[0].minecraftUser;
 }
 
 module.exports = { isInDB, getDiscordUser, getMinecraftUser };
