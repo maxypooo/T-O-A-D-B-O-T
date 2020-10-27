@@ -23,8 +23,6 @@ module.exports = class RestartCommand extends Command {
     //TODO: VERIFICATION
     async run(msg, args) {
         if (dbUtils.isInDB(modelDiscordMinecraft, "discordID", msg.author.id)) {
-            console.log("inside")
-            console.log(dbUtils.isInDB(modelDiscordMinecraft, "discordID", msg.author.id));
             msg.say(`${config.emojis.toadright} Minecraft Server will restart in 1 minute, check back soon. ${config.emojis.toadleft}`)
             exec(`screen -S minecraft -X stuff "say Server restart initiated by ${msg.author.username}. Server will restart in 1 minute.\n"`);
             setTimeout(function(){
@@ -34,8 +32,6 @@ module.exports = class RestartCommand extends Command {
                 exec(`screen -S minecraft -X stuff "stop\n"`);
             }, 60000);
         } else {
-            console.log("else)")
-            console.log(dbUtils.isInDB(modelDiscordMinecraft, "discordID", msg.author.id));
             msg.reply("You must first verify yourself using `toad verify` before you can use this command.")
         }
     }
