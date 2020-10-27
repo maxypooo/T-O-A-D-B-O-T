@@ -33,7 +33,7 @@ module.exports = class SpectatorCommand extends Command {
                 exec(`screen -S minecraft -X stuff "gamemode survival ${mcUser}\n"`);
             }, 30000);
         } else {
-            msg.reply("You must first verify yourself using `toad verify` before you can use this command.")
+            msg.reply(`You must first verify yourself using \`${config.prefix} verify\` before you can use this command.`)
         }
     }
 };
