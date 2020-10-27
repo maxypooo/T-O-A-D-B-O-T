@@ -2,7 +2,7 @@ const config = require('../config.json');
 const dynamoose = require("dynamoose");
 
 function isInDB(Model, hashkey, q) {
-    Model.query(hashkey).eq(q).exec((error, results) => {
+    console.log(Model.query(hashkey).eq(q).exec((error, results) => {
         if (error) {
             console.log("Error!")
             console.error(error);
@@ -16,8 +16,8 @@ function isInDB(Model, hashkey, q) {
                 return true;
             }
         }
-    });
-    console.log("done here")
+    }));
+
 }
 
 function getDiscordUser(Model, hashkey, discordID) {
