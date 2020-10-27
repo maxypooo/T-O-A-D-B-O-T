@@ -10,8 +10,7 @@ function isInDB(Model, hashkey, q) {
         } else {
             console.log("Success!");
             console.log(results);
-            if (results) return true;
-            else return false;
+            return true;
         }
     });
 }
