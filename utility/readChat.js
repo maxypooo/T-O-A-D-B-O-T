@@ -5,7 +5,7 @@ const client = new CommandoClient({
     commandPrefix: config.prefix,
     owner: config.owner
 });
-const Entry = require("../../utility/models/modelDiscordMinecraft")
+const Entry = require("../utility/models/modelDiscordMinecraft")
 
 
 function readChat(chatChannelName) {
@@ -33,7 +33,7 @@ function verifyCode(code) {
             let regex = /<\w{3,16}> [\w\S ]*$/;
             let lines = data.trim().split("\n");
             let lastLine = lines[lines.length - 1];
-            let chatMsg = lastLine.match(regex); //need to return this to Verify()
+            let chatMsg = lastLine.match(regex); //need to return this to Verify()git 
             
             if (chatMsg[0].includes(code)) {
                 let mcUsername = chatMsg[0].substring(chatMsg[0].lastIndexOf("<") + 1, chatMsg[0].lastIndexOf(">"));
