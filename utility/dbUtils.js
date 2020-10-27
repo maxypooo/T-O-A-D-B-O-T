@@ -7,8 +7,7 @@ async function isInDB(Model, hashkey, q) {
         if (results[0] == undefined) {
             console.log("User not in database.");
         } else {
-            console.log("Success!");
-            console.log(results[0]);
+            console.log("Success! User was found.");
             return true;
         }
     });
@@ -16,12 +15,12 @@ async function isInDB(Model, hashkey, q) {
 
 async function getDiscordUser(Model, hashkey, discordID) {
     await Model.query(hashkey).eq(discordID).exec()
-    .then(results => {return results[0].discordUser;});
+    .then(results => {console.log(results[0].discordUser);});
 }
 
 async function getMinecraftUser(Model, hashkey, discordID) {
     await Model.query(hashkey).eq(discordID).exec()
-    .then(results => {return results[0].minecraftUser;});
+    .then(results => {console.log(results[0].minecraftUser);});
 }
 
 module.exports = { isInDB, getDiscordUser, getMinecraftUser };
