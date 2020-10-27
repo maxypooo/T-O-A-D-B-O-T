@@ -37,6 +37,7 @@ function verifyCode(code) {
             
             if (chatMsg != null) { 
                 if (chatMsg[0].includes(code)) {
+                    watcher.close();
                     console.log("Code found! Verification pog!");
                     let mcUsername = chatMsg[0].substring(chatMsg[0].lastIndexOf("<") + 1, chatMsg[0].lastIndexOf(">"));
                     let u = new Entry();
@@ -54,7 +55,6 @@ function verifyCode(code) {
                             }
                         }
                     });
-                    watcher.close();
                 }
             } 
         });
