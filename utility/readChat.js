@@ -26,6 +26,7 @@ function readChat(chatChannelName) {
     });
 }
 
+//TODO: TIMEOUT THE THING SO IT DOESN'T LAST FOREVER IN VERIFY
 function verifyCode(code, msg) {
     let watcher = fs.watch(config.minecraft.logLocation, (curr, prev) => {
         fs.readFile(config.minecraft.logLocation, 'utf-8', async (err, data) => {
@@ -33,28 +34,26 @@ function verifyCode(code, msg) {
             let regex = /<\w{3,16}> [\w\S ]*$/;
             let lines = data.trim().split("\n");
             let lastLine = lines[lines.length - 1];
-            let chatMsg = lastLine.match(regex); //need to return this to Verify()git 
+            let chatMsg = lastLine.match(regex);
             
             if (chatMsg != null) { 
                 if (chatMsg[0].includes(code)) {
                     watcher.close();
                     console.log("Code found! Verification pog!");
                     let mcUsername = chatMsg[0].substring(chatMsg[0].lastIndexOf("<") + 1, chatMsg[0].lastIndexOf(">"));
-                    let u = new Entry();
-                    u.discordID = msg.author.id;
-                    u.discordUser = msg.author.username;
-                    u.minecraftUser = mcUsername;
-                    u.save({overwrite: false}, 
+                    let entry = new Entry();
+                    entry.discordID = msg.author.id;
+                    entry.discordUser = msg.author.username;
+                    entry.minecraftUser = mcUsername;
+                    entry.save({overwrite: false}, 
                         function(err){
                         if(err) {
-                            if (err.code === 'ConditionalCheckFailedException' && err.statusCode === 400) {
+                            if (err.code === 'ConditionalCheckFailedException' && err.statusCode === 400)
                                 console.log('discord id already exists.');
-                            }
-                            else {
+                            else
                                 console.log(err);
-                            }
                         }
-                        msg.say("Verification Successful! You can now use commands which require verification.");
+                        msg.reply("Verification Successful! You can now use commands which require verification.");
                     });
                 }
             } 

@@ -12,7 +12,7 @@ module.exports = class SpectatorCommand extends Command {
             description: 'Places the target into Spectator Mode for 30 seconds.',
             throttling: {
                 usages: 2,
-                duration: 600
+                duration: 3600
             },
             examples: [`${config.prefix} spectate Zerukai`],
             args: [{
@@ -24,6 +24,7 @@ module.exports = class SpectatorCommand extends Command {
     }
 
     async run(msg, args) {
+        //TODO: VERIFICATION
         msg.say(`${config.emojis.toadright} Granted ${args.mc_user} Specatator Mode for 30 seconds. ${config.emojis.toadleft}`);
         exec(`screen -S minecraft -X stuff "tellraw ${args.mc_user} {\"text\":\"You've been granted Spectator Mode for 30 seconds.\",\"italic\":true,\"color\":\"dark_green\"}\n"`);
         exec(`screen -S minecraft -X stuff "tellraw ${args.mc_user} {\"text\":\"[Click Here to return to Survival Mode early.]\",\"italic\":true,\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gamemode survival\"}}\n"`);
