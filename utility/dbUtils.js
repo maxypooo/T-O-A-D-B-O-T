@@ -8,9 +8,13 @@ function isInDB(Model, hashkey, q) {
             console.error(error);
             return false;
         } else {
-            console.log("Success!");
-            console.log(results[0]);
-            return true;
+            if (results[0] == undefined) {
+                console.log("User not in database.");
+            } else {
+                console.log("Success!");
+                console.log(results[0]);
+                return true;
+            }
         }
     });
 }
