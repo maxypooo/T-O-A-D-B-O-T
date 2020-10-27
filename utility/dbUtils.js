@@ -2,7 +2,7 @@ const config = require('../config.json');
 const dynamoose = require("dynamoose");
 
 function isInDB(Model, hashkey, q) {
-    Model.query(hashkey).eq(q).exec((error, results) => {
+    return Model.query(hashkey).eq(q).exec((error, results) => {
         if (error) {
             console.log("Error!")
             console.error(error);
