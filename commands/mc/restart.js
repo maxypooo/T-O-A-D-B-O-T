@@ -22,8 +22,7 @@ module.exports = class RestartCommand extends Command {
 
     //TODO: VERIFICATION
     async run(msg, args) {
-
-        Model.query(hashkey).eq(q).exec()
+        Model.query("discordID").eq(msg.author.id).exec()
         .then(results => {
             if (results[0] == undefined) {
                 console.log("User not in database.");
