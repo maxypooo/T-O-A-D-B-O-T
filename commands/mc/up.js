@@ -17,7 +17,7 @@ module.exports = class UpCommand extends Command {
             examples: [`${config.prefix} up 20`],
             args: [{
                 key: 'num',
-                prompt: 'What do you want to say?',
+                prompt: 'How high do you want to go? (Max: 128)',
                 type: 'integer',
                 validate: num => {
                     if (num < 1 || num > 128) 
@@ -39,7 +39,7 @@ module.exports = class UpCommand extends Command {
                 exec(`screen -S minecraft -X stuff "tellraw ${results[0].minecraftUser} {\"text\":\"[Click Here to return to Survival Mode early.]\",\"italic\":true,\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gamemode survival\"}}\n"`);
                 exec(`screen -S minecraft -X stuff "effect give ${results[0].minecraftUser} minecraft:slow_falling 30\n"`);
                 exec(`screen -S minecraft -X stuff "execute at ${results[0].minecraftUser} run particle minecraft:cloud ~ ~ ~ 0 0 0 0.1 15000\n"`);
-                exec(`screen -S minecraft -X stuff "tp ${results[0].minecraftUser} ~ ~${args.num} ~\n"`);
+                exec(`screen -S minecraft -X stuff "execute at ${results[0].minecraftUser} run tp ${results[0].minecraftUser} ~ ~${args.num} ~\n"`);
             }
         });
     }
