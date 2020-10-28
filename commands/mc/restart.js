@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando');
 const config = require('../../config.json')
 const { exec } = require("child_process");
-const dbUtils = require('../../utility/dbUtils')
 const modelDiscordMinecraft = require("../../utility/models/modelDiscordMinecraft")
 
 module.exports = class RestartCommand extends Command {
@@ -32,14 +31,15 @@ module.exports = class RestartCommand extends Command {
                 msg.say(`${config.emojis.toadright} Minecraft Server will restart in 1 minute, check back soon. ${config.emojis.toadleft}`)
                 exec(`screen -S minecraft -X stuff "say Server restart initiated by ${msg.author.username}. Server will restart in 1 minute.\n"`);
 
+                // There is probably a better way to do this...
                 setTimeout(function(){
                     exec(`screen -S minecraft -X stuff "say Server will restart in 10 seconds.\n"`);
                 }, 50000);
                 setTimeout(function(){
-                    exec(`screen -S minecraft -X stuff "say Server will restart in 10 seconds.\n"`);
+                    exec(`screen -S minecraft -X stuff "say Server will restart in 5 seconds.\n"`);
                 }, 55000);
                 setTimeout(function(){
-                    exec(`screen -S minecraft -X stuff "say Server will restart in 5 seconds.\n"`);
+                    exec(`screen -S minecraft -X stuff "say Server will restart in 4 seconds.\n"`);
                 }, 56000);
                 setTimeout(function(){
                     exec(`screen -S minecraft -X stuff "say Server will restart in 3 seconds.\n"`);

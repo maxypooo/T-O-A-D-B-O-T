@@ -38,7 +38,9 @@ function verifyCode(code, msg) {
             
             if (chatMsg != null) { 
                 if (chatMsg[0].includes(code)) {
-                    watcher.close();
+                    setTimeout(function(){
+                        watcher.close();
+                    }, 120000);
                     console.log("Code found! Verification pog!");
                     let mcUsername = chatMsg[0].substring(chatMsg[0].lastIndexOf("<") + 1, chatMsg[0].lastIndexOf(">"));
                     let entry = new Entry();
