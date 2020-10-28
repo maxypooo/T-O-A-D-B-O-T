@@ -16,7 +16,7 @@ module.exports = class VerifyCommand extends Command {
 
     async run(msg, args) {
         let randomString = Math.random().toString(36).substring(7);
-        msg.reply(`To verify your account, type the following string EXACTLY AS SHOWN into Minecraft: \`${randomString}\``);
+        msg.member.user.send(`To verify your account, type the following string EXACTLY AS SHOWN into Minecraft: \`${randomString}\``);
         verificationHandler.verifyCode(randomString, msg);
     }
 };
