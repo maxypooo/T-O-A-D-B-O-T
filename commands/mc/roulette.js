@@ -34,6 +34,8 @@ module.exports = class RouletteCommand extends Command {
                     `execute at ${results[0].minecraftUser} run summon evoker`,
                     `execute at ${results[0].minecraftUser} run summon ravager`,
                     `execute at ${results[0].minecraftUser} run summon creeper`,
+                    `execute at ${results[0].minecraftUser} setblock ~ ~ ~ lava`
+                    `effect give ${results[0].minecraftUser} poison 180 1`,
                     `execute at ${results[0].minecraftUser} run fill ~1 ~1 ~2 ~-1 ~-1 ~-1 minecraft:obsidian keep`,
                     `execute at ${results[0].minecraftUser} run summon elder_guardian`],
 
@@ -46,11 +48,18 @@ module.exports = class RouletteCommand extends Command {
                     `execute at ${results[0].minecraftUser} run summon witch`,
                     `effect give ${results[0].minecraftUser} hunger 3 255`,
                     `effect give ${results[0].minecraftUser} slowness 120 3`,
+                    `effect give ${results[0].minecraftUser} poison 10 1`,
                     `effect give ${results[0].minecraftUser} blindness 30 3`],
 
                     /* Luck 2 = Inconvenient Outcome */
                     [`execute at ${results[0].minecraftUser} run summon experience_bottle`,
                     `execute at ${results[0].minecraftUser} run summon trident ~ ~15 ~`,
+                    `execute at ${results[0].minecraftUser} run fill ~1 ~3 ~2 ~-1 ~5 ~ minecraft:gravel keep`,
+                    `effect give ${results[0].minecraftUser} hunger 10 50`,
+                    `effect give ${results[0].minecraftUser} slowness 30 2`,
+                    `effect give ${results[0].minecraftUser} poison 5 1`,
+
+                    `execute at ${results[0].minecraftUser} setblock ~ ~ ~ fire`
                     `execute at ${results[0].minecraftUser} run summon anvil ~ ~80 ~`],
 
 
@@ -59,13 +68,12 @@ module.exports = class RouletteCommand extends Command {
                     `execute at ${results[0].minecraftUser} run summon parrot`,
                     `execute at ${results[0].minecraftUser} run summon cat`,
                     `give ${results[0].minecraftUser} cooked_beef 8`,
-                    `give ${results[0].minecraftUser} emerald 16`,
                     `experience add ${results[0].minecraftUser} 5 levels`],
 
                     /* Luck 4 = Good Outcome */
                     [`execute at ${results[0].minecraftUser} run summon wolf`,
                     `experience add ${results[0].minecraftUser} 10 levels`,
-                    `give ${results[0].minecraftUser} emerald 32`,
+                    `give ${results[0].minecraftUser} emerald 16`,
                     `give ${results[0].minecraftUser} diamond 1`,
                     `give ${results[0].minecraftUser} end_crystal 1`,
                     `execute at ${results[0].minecraftUser} run summon wandering_trader`,
@@ -78,6 +86,7 @@ module.exports = class RouletteCommand extends Command {
                     /* Luck 5 = Great Outcome */
                     [`experience add ${results[0].minecraftUser} 30 levels`,
                     `give ${results[0].minecraftUser} diamond 3`,
+                    `give ${results[0].minecraftUser} emerald 32`,
                     `give ${results[0].minecraftUser} golden_carrot 64`,
                     `effect give ${results[0].minecraftUser} haste 600 1`,
                     `give ${results[0].minecraftUser} enchanted_book{StoredEnchantments:[{id:mending,lvl:1}]} 1`,
