@@ -29,11 +29,12 @@ module.exports = class RouletteCommand extends Command {
                     /* Luck 0 = Terrible Outcome */
                     [`kill ${results[0].minecraftUser}`,
                     `execute at ${results[0].minecraftUser} run tp ${results[0].minecraftUser} ~ ~10000 ~`,
-                    `execute at ${results[0].minecraftUser} run summon giant`,
                     `execute at ${results[0].minecraftUser} run summon vindicator`,
                     `execute at ${results[0].minecraftUser} run summon illusioner`,
                     `execute at ${results[0].minecraftUser} run summon evoker`,
+                    `execute at ${results[0].minecraftUser} run summon ravager`,
                     `execute at ${results[0].minecraftUser} run summon creeper`,
+                    `execute at ${results[0].minecraftUser} run fill ~1 ~1 ~2 ~-1 ~-1 ~-1 minecraft:obsidian keep`,
                     `execute at ${results[0].minecraftUser} run summon elder_guardian`],
 
                     /* Luck 1 = Bad Outcome */
@@ -58,18 +59,19 @@ module.exports = class RouletteCommand extends Command {
                     `execute at ${results[0].minecraftUser} run summon parrot`,
                     `execute at ${results[0].minecraftUser} run summon cat`,
                     `give ${results[0].minecraftUser} cooked_beef 8`,
+                    `give ${results[0].minecraftUser} emerald 16`,
                     `experience add ${results[0].minecraftUser} 5 levels`],
 
                     /* Luck 4 = Good Outcome */
                     [`execute at ${results[0].minecraftUser} run summon wolf`,
                     `experience add ${results[0].minecraftUser} 10 levels`,
-                    `give ${results[0].minecraftUser} emerald 16`,
                     `give ${results[0].minecraftUser} emerald 32`,
                     `give ${results[0].minecraftUser} diamond 1`,
                     `give ${results[0].minecraftUser} end_crystal 1`,
                     `execute at ${results[0].minecraftUser} run summon wandering_trader`,
                     `give ${results[0].minecraftUser} cooked_beef 32`,
                     `give ${results[0].minecraftUser} golden_apple 1`,
+                    `give ${results[0].minecraftUser} nautilus_shell 1`,
                     `effect give ${results[0].minecraftUser} absorption 9999 4`],
 
 
@@ -78,6 +80,9 @@ module.exports = class RouletteCommand extends Command {
                     `give ${results[0].minecraftUser} diamond 3`,
                     `give ${results[0].minecraftUser} golden_carrot 64`,
                     `effect give ${results[0].minecraftUser} haste 600 1`,
+                    `give ${results[0].minecraftUser} enchanted_book{StoredEnchantments:[{id:mending,lvl:1}]} 1`,
+                    `give ${results[0].minecraftUser} heart_of_the_sea 1`,
+                    `give ${results[0].minecraftUser} nautilus_shell 3`,
                     `give ${results[0].minecraftUser} ancient_debris 1`]
                 ]
 
