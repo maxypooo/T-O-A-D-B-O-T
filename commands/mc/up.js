@@ -11,8 +11,8 @@ module.exports = class UpCommand extends Command {
             memberName: 'up',
             description: 'Makes you go up X amount of blocks.',
             throttling: {
-                usages: 2,
-                duration: 3600
+                usages: 1,
+                duration: 60
             },
             examples: [`${config.prefix} up 20`],
             args: [{
