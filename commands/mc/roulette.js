@@ -84,7 +84,7 @@ module.exports = class RouletteCommand extends Command {
                 let luck = Math.floor(Math.random() * (5 - 0) + 0);
                 let luck_choice = Math.floor(Math.random() * (possibleOutcomes[luck].length - 1) + 0);
                 console.log(`command was: ${possibleOutcomes[luck][luck_choice]}`)
-                exec(`screen -S minecraft -X stuff "${possibleOutcomes[luck][luck_choice]}n"`);
+                exec(`screen -S minecraft -X stuff "${possibleOutcomes[luck][luck_choice]}\n"`);
             }
         });
     }
