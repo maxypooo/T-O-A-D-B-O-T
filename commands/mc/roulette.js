@@ -28,7 +28,7 @@ module.exports = class RouletteCommand extends Command {
                 let possibleOutcomes = [
                     /* Luck 0 = Terrible Outcome */
                     [`kill ${results[0].minecraftUser}`,
-                    `execute at ${results[0].minecraftUser} run tp ${results[0].minecraftUser} ~ ~10000 ~`
+                    `execute at ${results[0].minecraftUser} run tp ${results[0].minecraftUser} ~ ~10000 ~`,
                     `execute at ${results[0].minecraftUser} run summon giant`,
                     `execute at ${results[0].minecraftUser} run summon vindicator`,
                     `execute at ${results[0].minecraftUser} run summon illusioner`,
