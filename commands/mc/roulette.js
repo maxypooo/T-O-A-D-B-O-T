@@ -34,7 +34,7 @@ module.exports = class RouletteCommand extends Command {
                     `execute at ${results[0].minecraftUser} run summon evoker`,
                     `execute at ${results[0].minecraftUser} run summon ravager`,
                     `execute at ${results[0].minecraftUser} run summon creeper`,
-                    `execute at ${results[0].minecraftUser} setblock ~ ~ ~ lava`,
+                    `execute at ${results[0].minecraftUser} run setblock ~ ~ ~ lava`,
                     `effect give ${results[0].minecraftUser} poison 180 1`,
                     `execute at ${results[0].minecraftUser} run fill ~1 ~1 ~2 ~-1 ~-1 ~-1 minecraft:obsidian keep`,
                     `execute at ${results[0].minecraftUser} run summon elder_guardian`],
@@ -58,7 +58,7 @@ module.exports = class RouletteCommand extends Command {
                     `effect give ${results[0].minecraftUser} hunger 10 50`,
                     `effect give ${results[0].minecraftUser} slowness 30 2`,
                     `effect give ${results[0].minecraftUser} poison 5 1`,
-                    `execute at ${results[0].minecraftUser} setblock ~ ~ ~ fire`,
+                    `execute at ${results[0].minecraftUser} run setblock ~ ~ ~ fire`,
                     `execute at ${results[0].minecraftUser} run summon anvil ~ ~80 ~`],
 
 
