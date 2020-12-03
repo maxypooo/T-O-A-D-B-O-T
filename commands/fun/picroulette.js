@@ -22,6 +22,7 @@
         let rnd;
         let url = "https://prnt.sc/";
         const alphabet = "abcdefghijklmnopqrstuvwxyz"
+        let str = ""
         for (i = 0; i < 6; i++)
         {
             let picker = Math.floor(Math.random() * Math.floor(2));
@@ -33,8 +34,13 @@
             {
                 rnd = alphabet[Math.floor(Math.random() * alphabet.length)]
             }
-           url += rnd;
+            if (rnd === 0 && str.length === 0) {
+                i--;
+            }  else {
+                str += rnd;
+            }
         }
+        url += str;
         msg.say(url);
         
     }
