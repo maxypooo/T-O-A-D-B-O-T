@@ -12,15 +12,11 @@
             memberName: 'picroulette',
             description: 'RANDOM PICTURE TIME.',
             examples: [`${config.prefix} pr`],
-            args: [{
-                key: 'firstArg',
-                prompt: 'This is the first argument, you can access it with args.firstArg in the run function.',
-                type: 'string',
-            }]
         });
     }
     
     async run(msg, args) {
+        let i;
         let rnd;
         let url = "https://prnt.sc/";
         for (i = 0; i < 6; i++)
