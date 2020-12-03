@@ -21,7 +21,7 @@
         let url = "https://prnt.sc/";
         for (i = 0; i < 6; i++)
         {
-            picker = Math.floor(Math.random() * 2)
+            let picker = Math.floor(Math.random() * 2)
             if (picker == 0)
             {
                 rnd = Math.floor(Math.random() * 10);
