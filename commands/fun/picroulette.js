@@ -14,25 +14,30 @@
             examples: [`${config.prefix} pr`],
         });
     }
+
+    
     
     async run(msg, args) {
         let i;
         let rnd;
         let url = "https://prnt.sc/";
+        const alphabet = "abcdefghijklmnopqrstuvwxyz"
         for (i = 0; i < 6; i++)
         {
-            let picker = Math.floor(Math.random() * 2)
+            let picker = Math.random() * (1 - 0) + 0;
             if (picker == 0)
             {
-                rnd = Math.floor(Math.random() * 10);
+                rnd = Math.random() * (9 - 0) + 0;
 
             } else if (picker == 1)
             {
-                rnd = Math.random().toString(36).substring(2);
+                rnd = alphabet[Math.floor(Math.random() * alphabet.length)]
             }
            url += rnd;
         }
         msg.say(url);
         
     }
+
+    
 };
