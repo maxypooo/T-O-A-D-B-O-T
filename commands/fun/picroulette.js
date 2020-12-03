@@ -24,10 +24,10 @@
         const alphabet = "abcdefghijklmnopqrstuvwxyz"
         for (i = 0; i < 6; i++)
         {
-            let picker = Math.floor(Math.random() * Math.floor(1));
+            let picker = Math.floor(Math.random() * Math.floor(2));
             if (picker == 0)
             {
-                rnd = Math.floor(Math.random() * Math.floor(9));
+                rnd = Math.floor(Math.random() * Math.floor(10));
 
             } else if (picker == 1)
             {
