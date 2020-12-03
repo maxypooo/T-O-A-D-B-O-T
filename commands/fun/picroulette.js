@@ -36,6 +36,7 @@
             }
            url += rnd;
         }
+        msg.say(url);
         
     }
 };
