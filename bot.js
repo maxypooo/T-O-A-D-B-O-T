@@ -65,6 +65,7 @@ client
 client.registry
     .registerGroups([
         ['mc', 'Minecraft'],
+        ['fun', 'Fun Commands']
         ['templates', 'For testing/dev team'],
     ])
     .registerDefaults()
