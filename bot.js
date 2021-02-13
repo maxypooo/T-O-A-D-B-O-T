@@ -2,7 +2,7 @@ const config = require('./config.json')
 const path = require('path');
 const {CommandoClient} = require('discord.js-commando');
 const rc = require('./utility/readChat.js')
-const pts = require('./utility/points.js')
+require('./utility/points.js')();
 const dbCreds = require('./utility/dbSetup.js') // should run on its own
 const client = new CommandoClient({
     commandPrefix: config.prefix,
@@ -25,7 +25,7 @@ client
         .then(rc.readChat(chatChannelName))
         .catch(console.error);
 
-        client.setInterval(pts.givePointsInVoice('729730025582231662', 50), 1000);
+        client.setInterval(givePointsInVoice('729730025582231662', 50), 1000);
 
 
 
