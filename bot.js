@@ -25,7 +25,7 @@ client
         .then(rc.readChat(chatChannelName))
         .catch(console.error);
 
-        client.setInterval(givePointsInVoice('729730025582231662', 50), 1000);
+        client.setInterval(function() {console.log(typeof givePointsInVoice); givePointsInVoice('729730025582231662', 50)}, 1000);
 
 
 
