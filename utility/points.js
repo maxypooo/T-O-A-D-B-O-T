@@ -10,5 +10,5 @@ module.exports = function() {
         console.log("username is being printed here >><M><M<<><><>")
         voiceChannelsArray.members.each(user => console.log(user.username));
     //}
-    },
+    }
 };
