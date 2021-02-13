@@ -6,4 +6,4 @@ function givePointsInVoice(voiceChannelsArray, amountOfPoints) {
     }
 }
 
-module.exports = givePointsInVoice;
+module.exports = {givePointsInVoice};
