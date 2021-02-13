@@ -26,8 +26,9 @@ client
         .catch(console.error);
 
         client.setInterval(function() {
-            let voiceChannelNames = client.channels.cache.filter(ch => ch.id === '729730025582231662');
-            voiceChannelNames.members.each(user => console.log(user.username));
+            let voiceChannel = client.channels.get('729730025582231662')
+            console.log(voiceChannel)
+//            voiceChannelNames.members.each(user => console.log(user.username));
         }, 1000);
 
 
