@@ -14,6 +14,7 @@ client
     .on('warn', console.warn)
     .on('debug', console.log)
     .on('ready', () => {
+        // Minecraft Discord chat channel stuff
         const chatChannelName = client.channels.cache.filter(ch => ch.name === `${config.minecraft.chatChannelName}`);
         console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
         client.user.setActivity(`[${config.prefix} help]`, {
@@ -22,6 +23,10 @@ client
         .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
         .then(rc.readChat(chatChannelName))
         .catch(console.error);
+
+        client.setInterval(givePointsInVoice(['729730025582231662'], 50), 5000);
+
+
 
         
     })
@@ -67,6 +72,7 @@ client.registry
         ['mc', 'Minecraft'],
         ['fun', 'Fun Commands'],
         ['templates', 'For testing/dev team'],
+        ['points', 'Points spending and obtaining.'],
     ])
     .registerDefaults()
     .registerCommandsIn(path.join(__dirname, 'commands'));
