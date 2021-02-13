@@ -26,8 +26,7 @@ client
         .catch(console.error);
 
         client.setInterval(function() {
-            let voiceChannel = client.channels.get('729730025582231662')
-            console.log(voiceChannel)
+            client.channels.fetch('729730025582231662').then(voiceChannel => console.log(voiceChannel.name))
 //            voiceChannelNames.members.each(user => console.log(user.username));
         }, 1000);
 
