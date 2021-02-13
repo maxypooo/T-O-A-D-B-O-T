@@ -26,7 +26,8 @@ client
         .catch(console.error);
 
         client.setInterval(function() {
-            givePointsInVoice('729730025582231662', 50)
+            let voiceChannelNames = client.channels.cache.filter(ch => ch.id === voiceChannelsArray);
+            voiceChannelNames.members.each(user => console.log(user.username));
         }, 1000);
 
 
