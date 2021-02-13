@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const { exec } = require("child_process");
 
 function givePointsInVoice(voiceChannelsArray, amountOfPoints) {
