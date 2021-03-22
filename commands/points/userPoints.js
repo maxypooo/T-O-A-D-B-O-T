@@ -1,5 +1,3 @@
-/* Initial imports, do not remove these. You can add
-   more as you wish. */
 const { Command } = require('discord.js-commando');
 const config = require('../../config.json')
 const modelToadPoints = require("../../utility/models/modelToadPoints")
@@ -8,7 +6,7 @@ module.exports = class PointsCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'points',
-            aliases: ['pts'],
+            aliases: ['pts', 'toadbucks', 'bucks'],
             group: 'points',
             memberName: 'points',
             description: 'Display how many points you have.',
@@ -26,9 +24,9 @@ module.exports = class PointsCommand extends Command {
                 return console.log(err);
             }
             if (user == undefined) {
-                return msg.reply(`you haven't earned any points yet. :(`)
+                return msg.reply(`you haven't earned any ToadBucks:tm: yet. :(`)
             }
-            msg.reply(`you have **${user.points}** points! ${config.emojis.toadleft}`);
+            msg.reply(`you have **${user.points}** ToadBucks:tm:! ${config.emojis.toadleft}`);
         })
     }
 };
