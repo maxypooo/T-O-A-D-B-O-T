@@ -9,6 +9,8 @@ const client = new CommandoClient({
     owner: config.owner
 });
 
+const pointsPerInterval = 1;
+
 
 client
     .on('error', console.error)
@@ -26,8 +28,8 @@ client
         .catch(console.error);
 
         client.setInterval(function() {
-            givePointsInVoice(client, '729730025582231662', 50);
-        }, 1000);
+            givePointsInVoice(client, config.pointsVoiceChannel, pointsPerInterval);
+        }, config.pointsDelayInMilliseconds);
 
 
 
