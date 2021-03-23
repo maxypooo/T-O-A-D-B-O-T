@@ -5,6 +5,7 @@ const {
 } = require('discord.js');
 const Discord = require("discord.js")
 const modelGambaInfo = require("../../utility/models/modelGambaInfo")
+require('../../utility/gambaUtils.js')();
 
 module.exports = class StartGambaCommand extends Command {
     constructor(client) {
@@ -29,7 +30,7 @@ module.exports = class StartGambaCommand extends Command {
                 }
             }, {
                 key: 'options',
-                prompt: 'What options do you want for the gamba? Enter your options separated with semicolons, like this:\n\`option 1; option 2; option 3\`',
+                prompt: 'What options do you want for the gamba? Enter your options as a list separated with semicolons and surrounded by quotes, like this:\n\`option 1; option 2; option 3\`',
                 type: 'string',
                 validate: options => {
                     var optionsList = options.split(";");
@@ -41,17 +42,20 @@ module.exports = class StartGambaCommand extends Command {
                 prompt: 'How many __**seconds**__ before the gamba is locked?',
                 type: 'integer',
                 validate: time => {
-                    if (time >= 2 && time <= 120) return true;
-                    return 'Voting time must be between 30 and 120 seconds.';
+                    if (time >= 60 && time <= 240) return true;
+                    return 'Voting time must be between 60 and 240 seconds.';
                 }
             }]
     });
 }
 
 async run(msg, {prompt, options, time}) {
+    
     const emojiList = ['1⃣', '2⃣'];
     var optionsList = options.split(";");
     var optionsText = "";
+
+    msg.say(`${config.points.gambaRolePing}, a new Gamba has been created. Vote now!`)
 
     modelGambaInfo.scan().exec((err, gambaInfo) => {
         if (err) {
@@ -64,10 +68,11 @@ async run(msg, {prompt, options, time}) {
         }
 
         for (var i = 0; i < optionsList.length; i++) {
-            optionsText += emojiList[i] + " " + optionsList[i] + "\n";
+            optionsText += emojiList[i] + "   " + optionsList[i] + "\n";
         }
     
         var embed = new Discord.MessageEmbed()
+            .setAuthor(`${msg.author.username} started a gamba!`, msg.author.displayAvatarURL())
             .setTitle(`Gamba - ${prompt}`)
             .setDescription(optionsText)
             .setColor('#3E8B9B') 
@@ -101,15 +106,13 @@ async run(msg, {prompt, options, time}) {
                 }
             });
         })
-
-        msg.say('<@&823740658303893524>, a new Gamba has been created. Vote now!')
     
         setTimeout(function(){
             modelGambaInfo.update({discordID: config.botID}, {active: false}, function(err, user) {
                 if (err) {
                     return console.log(err);
                 }
-                msg.say(`Gamba - ${prompt} - is now closed for voting.`)
+                getGambaInfo(msg, "Voting Period Over");
             });
         }, time * 1000);
     })    
