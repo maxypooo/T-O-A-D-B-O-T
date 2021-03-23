@@ -28,12 +28,8 @@ client
         .catch(console.error);
 
         client.setInterval(function() {
-            givePointsInVoice(client, config.pointsVoiceChannel, pointsPerInterval);
+            givePointsInVoice(client, config.pointsVoiceChannels, pointsPerInterval);
         }, config.pointsDelayInMilliseconds);
-
-
-
-        
     })
     .on('disconnect', () => {
         console.warn('Disconnected!');

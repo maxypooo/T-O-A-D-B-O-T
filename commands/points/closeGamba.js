@@ -1,0 +1,97 @@
+const { Command } = require('discord.js-commando');
+const config = require('../../config.json')
+const {
+    RichEmbed
+} = require('discord.js');
+const Discord = require("discord.js")
+const modelGambaInfo = require("../../utility/models/modelGambaInfo")
+const modelGambaPoints = require("../../utility/models/modelGambaPoints")
+const modelToadPoints = require("../../utility/models/modelToadPoints")
+
+module.exports = class CloseGambaCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'closegamba',
+            aliases: ['cg',"stopbet"],
+            group: 'points',
+            memberName: 'closegamba',
+            description: 'Close a Gamba and distribute all earned ToadBucks:tm:.',
+            examples: [`${config.prefix} points`],
+            args: [{
+                key: 'winningOption',
+                prompt: 'Which option won?',
+                type: 'integer',
+                validate: winningOption => {
+                    if (winningOption == 1 || winningOption == 2) return true;
+                    return 'The winner must be either option **1** or option **2**.'
+                }
+            }]
+    });
+}
+
+async run(msg, {winningOption}) {
+    let totalPts = 0;
+    let winnerPts = 0;
+    let winnerRatio = 0;
+
+    // display info to users
+    modelGambaInfo.scan().exec((err, gambaInfo) => {
+        if (err) {
+            console.log(err);
+        }
+        if (gambaInfo[0].winner != -1) {
+            return msg.reply("This gamba has already had a winner declared.");
+        }
+        
+        modelGambaPoints.scan().exec((err, users) => {
+            // collect total points
+            for (let i = 0; i < users.count; i++) {
+                totalPts += users[i].points;
+            }
+    
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].selectedOption == winningOption) {
+                    winnerPts += users[i].points;
+                } 
+            }
+    
+            winnerRatio = totalPts / winnerPts;
+            
+            //WINNERS
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].selectedOption == winningOption) {
+                    modelToadPoints.update({discordID: users[i].discordID}, {$ADD: {points: (Math.ceil(winnerRatio * users[i].points))}}, function(err, user) {
+                        if (err) {
+                            return console.log(err);
+                        }
+                    });
+                }
+            }
+    
+            // delete all points in gamba table
+            for (let i = 0; i < users.length; i++) {
+                modelGambaPoints.delete({discordID: users[i].discordID}, function(err, user) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                });
+            }
+    
+            // set the gamba's winner in the table
+            modelGambaInfo.update({discordID: config.botID}, {winner: winningOption}, function(err, user) {
+                if (err) {
+                    return console.log(err);
+                }
+            });
+    
+            var embed = new Discord.MessageEmbed()
+            .setTitle(`Gamba Closed - ${gambaInfo[0].prompt}`)
+            .setDescription(`Winner: **${(winningOption == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.`)
+            .setColor('#3E8B9B') 
+            .setThumbnail(msg.author.displayAvatarURL())
+            .setFooter('Help: toad help closegamba')
+    
+            msg.say(embed);
+        });
+    });
+}};
