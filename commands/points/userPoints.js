@@ -24,14 +24,15 @@ module.exports = class PointsCommand extends Command {
             if (user == undefined) {
                 return msg.reply(`you haven't earned any ToadBucks:tm: yet. Earn ToadBucks:tm by joining a voice channel and hanging out.`)
             }
+
             let embed = new Discord.MessageEmbed()
-            .setAuthor("T O A D S T A C K E R S Banking Co.", 'https://i.imgur.com/MMh4NRQ.png')
-            .setTitle(`${msg.author.username}'s ToadBucks:tm: Account Balance`)
-            .setDescription(`${msg.author.username} has **${user.points}** ToadBucks:tm:!`)
-            .setColor('#3E8B9B')
-            .setThumbnail(msg.author.displayAvatarURL())
-            .setFooter('View your balance with "toad points"\n\n')
-            .setTimestamp();
+                .setAuthor("T O A D S T A C K E R S Banking Co.", 'https://i.imgur.com/MMh4NRQ.png')
+                .setTitle(`${msg.author.username}'s ToadBucks:tm: Account Balance`)
+                .setDescription(`${msg.author.username} has **${user.points}** ToadBucks:tm:!`)
+                .setColor('#0DBF13')
+                .setThumbnail(msg.author.displayAvatarURL())
+                .setFooter('View your balance with "toad points"\n\n')
+                .setTimestamp();
             msg.say(embed);
         })
     }

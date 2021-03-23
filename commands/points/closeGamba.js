@@ -88,6 +88,9 @@ async run(msg, {winningOption}) {
                 }
         
                 winnerRatio = totalPts / winnerPts;
+                if (winnerRatio == 1) {
+                    winnerRatio = 1.2;
+                }
                 
                 //WINNERS
                 for (let i = 0; i < users.length; i++) {

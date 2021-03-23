@@ -106,15 +106,19 @@ async run(msg, {optionSelection, pointsToBet}) {
                     if (err) {
                         return console.log(err);
                     }
-                    var embed = new Discord.MessageEmbed()
+                    modelToadPoints.get({discordID: msg.author.id}, function(err, userBetInfo) {
+                        var embed = new Discord.MessageEmbed()
                         .setTitle(`${userAccount.discordUser} deposited【${pointsToBet}】${(pointsToBet == 1 ? "ToadBuck:tm:" : "ToadBucks:tm:")}`)
                         .setDescription(`- Question: ${gambaInfo[0].prompt}
-                                         - Voted for option **${(optionSelection == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.`)
-                        .setColor('#3E8B9B') 
+                                         - Voted for option **${(optionSelection == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.
+                                         - Total deposit: ${userBetInfo[0].points} ToadBucks:tm:`)
+                        .setColor('#DB6B63') 
                         .setThumbnail(msg.author.displayAvatarURL())
                         .setFooter('Help: toad help gamba')
 
                     msg.say(embed);
+                    });
+
                 });
                 
                 // Finally, update the gamba info for displaying later

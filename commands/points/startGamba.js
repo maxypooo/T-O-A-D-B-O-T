@@ -75,7 +75,7 @@ async run(msg, {prompt, options, time}) {
             .setAuthor(`${msg.author.username} started a gamba!`, msg.author.displayAvatarURL())
             .setTitle(`Gamba - ${prompt}`)
             .setDescription(optionsText)
-            .setColor('#3E8B9B') 
+            .setColor('#E30BBB') 
             .setThumbnail('https://i.imgur.com/MMh4NRQ.png')
             .setFooter('Vote with "toad gamba"!\n')
             .setTimestamp();
