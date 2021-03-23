@@ -43,6 +43,7 @@ module.exports = class GambaCommand extends Command {
 }
 
 async run(msg, {optionSelection, pointsToBet}) {
+    msg.delete();
     modelGambaInfo.scan().exec((err, gambaInfo) => {
         if (err) {
             return console.log(err);
@@ -100,22 +101,32 @@ async run(msg, {optionSelection, pointsToBet}) {
                         }
                     })};
                 }
-                // Finally, remove those points from their account main and let them know
+                // Remove those points from their account main and let them know
                 modelToadPoints.update({discordID: msg.author.id}, {$ADD: {points: (-1 * pointsToBet)}}, function(err) {
                     if (err) {
                         return console.log(err);
                     }
                     var embed = new Discord.MessageEmbed()
-                        .setTitle(`${userAccount.discordUser} deposited ${pointsToBet} ${(pointsToBet == 1 ? "ToadBuck:tm:" : "ToadBucks:tm:")}`)
+                        .setTitle(`${userAccount.discordUser} deposited【${pointsToBet}】${(pointsToBet == 1 ? "ToadBuck:tm:" : "ToadBucks:tm:")}`)
                         .setDescription(`- Question: ${gambaInfo[0].prompt}
-                                       \n- Voted for option **${(optionSelection == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.`)
+                                         - Voted for option **${(optionSelection == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.`)
                         .setColor('#3E8B9B') 
                         .setThumbnail(msg.author.displayAvatarURL())
                         .setFooter('Help: toad help gamba')
 
                     msg.say(embed);
-                });   
+                });
+                
+                // Finally, update the gamba info for displaying later
+                if (optionSelection == 1) {
+                    modelGambaInfo.update({discordID: config.botID}, {$ADD: {optionOnePoints: pointsToBet}});
+                    modelGambaInfo.update({discordID: config.botID}, {$ADD: {optionOneVoters: 1}});
+                } else {
+                    modelGambaInfo.update({discordID: config.botID}, {$ADD: {optionTwoPoints: pointsToBet}});
+                    modelGambaInfo.update({discordID: config.botID}, {$ADD: {optionTwoVoters: 1}});
+                }
             });
         });
     });
 }};
+

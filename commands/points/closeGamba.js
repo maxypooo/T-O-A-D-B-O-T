@@ -30,6 +30,7 @@ module.exports = class CloseGambaCommand extends Command {
 }
 
 async run(msg, {winningOption}) {
+    msg.delete();
     let totalPts = 0;
     let winnerPts = 0;
     let winnerRatio = 0;
@@ -42,56 +43,82 @@ async run(msg, {winningOption}) {
         if (gambaInfo[0].winner != -1) {
             return msg.reply("This gamba has already had a winner declared.");
         }
+        if (msg.author.id != gambaInfo[0].discordIDStarter) {
+            return msg.reply("Only the person who started the gamba can close it.")
+        }
 
-        modelGambaPoints.scan().exec((err, users) => {
-            // collect total points
-            for (let i = 0; i < users.count; i++) {
-                totalPts += users[i].points;
-            }
-    
-            for (let i = 0; i < users.length; i++) {
-                if (users[i].selectedOption == winningOption) {
-                    winnerPts += users[i].points;
-                } 
-            }
-    
-            winnerRatio = totalPts / winnerPts;
-            
-            //WINNERS
-            for (let i = 0; i < users.length; i++) {
-                if (users[i].selectedOption == winningOption) {
-                    modelToadPoints.update({discordID: users[i].discordID}, {$ADD: {points: (Math.ceil(winnerRatio * users[i].points))}}, function(err, user) {
+        if (winningOption == 0) { // Ties/Refunds
+            modelGambaPoints.scan().exec((err, users) => {
+                for (let i = 0; i < users.count; i++) {
+                    modelToadPoints.update({discordID: users[i].discordID}, {$ADD: {points: users[i].points}}, function(err) {
                         if (err) {
                             return console.log(err);
                         }
                     });
                 }
-            }
-    
-            // delete all points in gamba table
-            for (let i = 0; i < users.length; i++) {
-                modelGambaPoints.delete({discordID: users[i].discordID}, function(err, user) {
+
+                // delete all points in gamba table
+                for (let i = 0; i < users.length; i++) {
+                    modelGambaPoints.delete({discordID: users[i].discordID}, function(err, user) {
+                        if (err) {
+                            return console.log(err);
+                        }
+                    });
+                }
+        
+                // set the gamba's winner in the table
+                modelGambaInfo.update({discordID: config.botID}, {winner: winningOption}, function(err, user) {
                     if (err) {
                         return console.log(err);
                     }
+                    getGambaInfo(msg, "Ended");
                 });
-            }
-    
-            // set the gamba's winner in the table
-            modelGambaInfo.update({discordID: config.botID}, {winner: winningOption}, function(err, user) {
-                if (err) {
-                    return console.log(err);
-                }
             });
-    
-            var embed = new Discord.MessageEmbed()
-            .setTitle(`Gamba Closed - ${gambaInfo[0].prompt}`)
-            .setDescription(`Winner: **${(winningOption == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.`)
-            .setColor('#3E8B9B') 
-            .setThumbnail(msg.author.displayAvatarURL())
-            .setFooter('Help: toad help closegamba')
-    
-            msg.say(embed);
-        });
+        } else { // Normal point distribution
+            modelGambaPoints.scan().exec((err, users) => {
+                // collect total points
+                for (let i = 0; i < users.count; i++) {
+                    totalPts += users[i].points;
+                }
+        
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].selectedOption == winningOption) {
+                        winnerPts += users[i].points;
+                    } 
+                }
+        
+                winnerRatio = totalPts / winnerPts;
+                
+                //WINNERS
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].selectedOption == winningOption) {
+                        modelToadPoints.update({discordID: users[i].discordID}, {$ADD: {points: (Math.ceil(winnerRatio * users[i].points))}}, function(err, user) {
+                            if (err) {
+                                return console.log(err);
+                            }
+                        });
+                    }
+                }
+        
+                // delete all points in gamba table
+                for (let i = 0; i < users.length; i++) {
+                    modelGambaPoints.delete({discordID: users[i].discordID}, function(err, user) {
+                        if (err) {
+                            return console.log(err);
+                        }
+                    });
+                }
+        
+                // set the gamba's winner in the table
+                modelGambaInfo.update({discordID: config.botID}, {winner: winningOption}, function(err, user) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    getGambaInfo(msg, "Ended");
+                });
+        
+                
+            });
+        }
     });
 }};
