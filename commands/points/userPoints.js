@@ -10,10 +10,6 @@ module.exports = class PointsCommand extends Command {
             group: 'points',
             memberName: 'points',
             description: 'Display how many points you have.',
-            throttling: {
-                usages: 1,
-                duration: 60
-            },
             examples: [`${config.prefix} points`],
         });
     }
