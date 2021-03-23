@@ -101,6 +101,8 @@ async run(msg, {prompt, options, time}) {
                 }
             });
         })
+
+        msg.say('<@&823740658303893524>, a new Gamba has been created. Vote now!')
     
         setTimeout(function(){
             modelGambaInfo.update({discordID: config.botID}, {active: false}, function(err, user) {

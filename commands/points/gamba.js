@@ -107,7 +107,8 @@ async run(msg, {optionSelection, pointsToBet}) {
                     }
                     var embed = new Discord.MessageEmbed()
                         .setTitle(`${userAccount.discordUser} deposited ${pointsToBet} ${(pointsToBet == 1 ? "ToadBuck:tm:" : "ToadBucks:tm:")}`)
-                        .setDescription(`- Voted for option **${(optionSelection == 1 ? gambaInfo.optionOneTxt : gambaInfo.optionTwoTxt)}**.`)
+                        .setDescription(`- Question: ${gambaInfo[0].prompt}
+                                       \n- Voted for option **${(optionSelection == 1 ? gambaInfo[0].optionOneTxt : gambaInfo[0].optionTwoTxt)}**.`)
                         .setColor('#3E8B9B') 
                         .setThumbnail(msg.author.displayAvatarURL())
                         .setFooter('Help: toad help gamba')

@@ -22,8 +22,8 @@ module.exports = class CloseGambaCommand extends Command {
                 prompt: 'Which option won?',
                 type: 'integer',
                 validate: winningOption => {
-                    if (winningOption == 1 || winningOption == 2) return true;
-                    return 'The winner must be either option **1** or option **2**.'
+                    if (winningOption == 0 || winningOption == 1 || winningOption == 2) return true;
+                    return 'The winner must be either 0 (refund points), 1 (option 1 wins), or 2 (option 2 wins).'
                 }
             }]
     });
@@ -42,7 +42,7 @@ async run(msg, {winningOption}) {
         if (gambaInfo[0].winner != -1) {
             return msg.reply("This gamba has already had a winner declared.");
         }
-        
+
         modelGambaPoints.scan().exec((err, users) => {
             // collect total points
             for (let i = 0; i < users.count; i++) {

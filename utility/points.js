@@ -12,7 +12,7 @@ module.exports = function() {
             // Find the voice channel from the current ID
             client.channels.fetch(voiceChannelIDArr[i]).then(voiceChannel => {
                 // Return if the voice channel is empty.
-                if (voiceChannel.members.size == 0) return;
+                if (voiceChannel.members.size == 0) { return };
                 // Loop through all members in that voice channel
                 for (const [memberID, member] of voiceChannel.members) {
                     // Query the database to see if the discordID key has the value of the member in the voice chat
