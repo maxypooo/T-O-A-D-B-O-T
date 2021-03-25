@@ -19,7 +19,7 @@ module.exports = class StartGambaCommand extends Command {
                 usages: 1,
                 duration: 60
             },
-            examples: [`${config.prefix} points`],
+            examples: [`${config.prefix} startgamba "This is my example prompt" "This is option 1;This is option 2" 180 <----- starts a gamba with 2 options and 180 seconds to vote on them.`],
             args: [{
                 key: 'prompt',
                 prompt: 'Provide a prompt for this gamba.',
@@ -50,7 +50,6 @@ module.exports = class StartGambaCommand extends Command {
 }
 
 async run(msg, {prompt, options, time}) {
-    
     const emojiList = ['1⃣', '2⃣'];
     var optionsList = options.split(";");
     var optionsText = "";
@@ -79,9 +78,7 @@ async run(msg, {prompt, options, time}) {
             .setThumbnail('https://i.imgur.com/MMh4NRQ.png')
             .setFooter('Vote with "toad gamba"!\n')
             .setTimestamp();
-    
-        msg.delete(); // Remove the user's command message
-    
+        
         msg.say(embed).then(sentEmbed => {
             let entry = new modelGambaInfo();
             entry.discordID = config.botID;

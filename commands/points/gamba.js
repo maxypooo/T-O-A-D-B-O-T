@@ -43,7 +43,6 @@ module.exports = class GambaCommand extends Command {
 }
 
 async run(msg, {optionSelection, pointsToBet}) {
-    msg.delete();
     modelGambaInfo.scan().exec((err, gambaInfo) => {
         if (err) {
             return console.log(err);
@@ -67,7 +66,6 @@ async run(msg, {optionSelection, pointsToBet}) {
                 
             // See if they're already in the gamba points table
             modelGambaPoints.get({discordID: msg.author.id}, function(err, userGamba) {
-                console.log(userGamba)
                 // Check for any errors
                 if (err) {
                     return console.log(err);

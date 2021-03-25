@@ -16,7 +16,6 @@ module.exports = class GambaStatsCommand extends Command {
     }
 
     async run(msg) {
-        msg.delete();
         getGambaInfo(msg, "Stats");
     }
 };

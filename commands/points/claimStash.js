@@ -21,6 +21,7 @@ module.exports = class ClaimStashCommand extends Command {
     }
 
     async run(msg) {
+        msg.delete();
         // Generate a random stash value between the minimum and maximum values from the config file.
         const stashValue = Math.floor(Math.random() * (config.points.maxStash - config.points.minStash + 1) + config.points.minStash);
 
