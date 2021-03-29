@@ -17,7 +17,7 @@ module.exports = class LeaderboardCommand extends Command {
 
     async run(msg) {
         msg.delete();
-        modelToadPoints.scan("points").gt(0).limit(10).exec((err, pointsInfo) => {
+        modelToadPoints.scan("points").gt(0).exec((err, pointsInfo) => {
             if (err) {
                 return console.log(err);
             }
