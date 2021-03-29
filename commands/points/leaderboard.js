@@ -11,7 +11,7 @@ module.exports = class LeaderboardCommand extends Command {
             group: 'points',
             memberName: 'leaderboard',
             description: 'Display top 10 ToadBucks:tm: earners.',
-            examples: [`${config.prefix} points`],
+            examples: [`${config.prefix} leaderboard`],
         });
     }
 
