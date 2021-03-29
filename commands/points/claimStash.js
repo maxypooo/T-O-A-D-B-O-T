@@ -11,7 +11,7 @@ module.exports = class ClaimStashCommand extends Command {
             aliases: ['stash', "claim"],
             group: 'points',
             memberName: 'claimstash',
-            description: 'Claim your stash once every 30 minutes.',
+            description: `Claim your ToadBucks:tm: stash once every 30 minutes. Gives you between ${config.points.maxStash} and ${config.points.minStash} ToadBucks:tm:.`,
             throttling: {
                 usages: 1,
                 duration: 1800

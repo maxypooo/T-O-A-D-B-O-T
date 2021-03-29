@@ -16,7 +16,7 @@ module.exports = class CloseGambaCommand extends Command {
             group: 'points',
             memberName: 'closegamba',
             description: 'Close a Gamba and distribute all earned ToadBucks:tm:.',
-            examples: [`${config.prefix} points`],
+            examples: [`${config.prefix} cg 1 <---- Closes the gamba and distributes points to those who chose option 1.`],
             args: [{
                 key: 'winningOption',
                 prompt: 'Which option won?',
